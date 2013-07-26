@@ -6,8 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>AutoProjectSetup</title>
 		<meta name="author" content="" />
-		<link type="text/css" rel="stylesheet" href="resource/css/style.css" />
-		<script type="text/javascript" src="src/main.js"></script>
+		
 		<style>
 			* {
 				padding: 0;
@@ -116,6 +115,8 @@
 						$this -> makeFolder("resource");
 						//make css folder
 						$this -> makeFolder("resource/css");
+						//make image folder
+						$this -> makeFolder("resource/image");
 						
 						//create main js file
 						$this -> makeMainJS();
