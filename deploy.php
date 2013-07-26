@@ -9,6 +9,7 @@ Class Deploy {
 		$dst = getcwd() . "/" . Deploy::DEPLOY_DIR . "/";
 		$this -> recurse_copy($src, $dst);
 		$this->createTextFile();
+		
 	}
 
 	private function recurse_copy($src, $dst) {
@@ -48,6 +49,17 @@ Class Deploy {
 		$file = getcwd() . "/" . Deploy::DEPLOY_DIR . "/".'deployment_details.txt';
 		$date = new DateTime('now');
 		$content = "Deployment created on ".$date->format('d-m-Y H:i:s');
+		
+		exec("git diff-tree --no-commit-id --name-only -r bd61ad98",$output);
+		var_dump($output);
+		if($output)
+		{
+			$content .="\n"."Changes since last commit\n-------------------------\n";
+			for($a=0;$a<count($output);$a++)
+			{
+				$content .=$output[$a]."\n";
+			}
+		}
 		file_put_contents($file, $content);
 	}
 
