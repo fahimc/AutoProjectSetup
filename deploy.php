@@ -2,8 +2,8 @@
 set_time_limit(0);
 Class Deploy {
 	const DEPLOY_DIR = "deploy";
-	private $ignore_folders = array("deploy", "jasmine", "jasmine-1.3.1");
-	private $ignore_files = array("README.md","deploy.php","setup.php","deployclean.php");
+	private $ignore_folders = array("deploy", "jasmine", "jasmine-1.3.1",".git");
+	private $ignore_files = array("README.md","deploy.php","setup.php","deployclean.php",".project");
 	public function init() {
 		$src = getcwd();
 		$dst = getcwd() . "/" . Deploy::DEPLOY_DIR . "/";
@@ -50,11 +50,11 @@ Class Deploy {
 		$date = new DateTime('now');
 		$content = "Deployment created on ".$date->format('d-m-Y H:i:s');
 		
-		exec("git diff-tree --no-commit-id --name-only -r bd61ad98",$output);
-		var_dump($output);
+		// exec("git diff origin --name-only",$output);
+		exec("git diff --stat master",$output);
 		if($output)
 		{
-			$content .="\n"."Changes since last commit\n-------------------------\n";
+			$content .="\n\n"."Changes in last push\n-------------------------\n";
 			for($a=0;$a<count($output);$a++)
 			{
 				$content .=$output[$a]."\n";
