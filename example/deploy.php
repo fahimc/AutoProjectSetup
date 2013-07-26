@@ -1,4 +1,5 @@
 <?php
+set_time_limit(0);
 Class Deploy {
 	const DEPLOY_DIR = "deploy";
 	private $ignore_folders = array("deploy", "jasmine", "jasmine-1.3.1");
@@ -7,6 +8,7 @@ Class Deploy {
 		$src = getcwd();
 		$dst = getcwd() . "/" . Deploy::DEPLOY_DIR . "/";
 		$this -> recurse_copy($src, $dst);
+		$this->createTextFile();
 	}
 
 	private function recurse_copy($src, $dst) {
@@ -40,6 +42,13 @@ Class Deploy {
 			}
 		}
 		closedir($dir);
+	}
+	private function createTextFile()
+	{
+		$file = getcwd() . "/" . Deploy::DEPLOY_DIR . "/".'deployment_details.txt';
+		$date = new DateTime('now');
+		$content = "Deployment created on ".$date->format('d-m-Y H:i:s');
+		file_put_contents($file, $content);
 	}
 
 }
