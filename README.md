@@ -1,6 +1,5 @@
 AutoProjectSetup
 ================
-
 This script will create the relevant folders and libraries for the foundations of any JavaScript project.  
 
 ###Libraries Included
@@ -38,4 +37,6 @@ index.html
 ```
 
 
+##Auto Deploy
+You can use the **'deploy.php'** to deploy all the files and folders from the root of your directory into the deployed folder. It will filter out the folders which are not to be deployed such as 'jasmine', 'deploy' etc...
 
